@@ -1,14 +1,14 @@
 # Comandos de Docker
 
-- See docker version
+See docker version
 
     $ docker --version
 
-- View docker status
+View docker status
 
     $ docker info
 
-- Run a container
+Run a container
 
     $ docker run <image name>
 
