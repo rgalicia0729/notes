@@ -147,3 +147,19 @@ View the images that are in the local environment
 Bring an image from a repository to the local environment
 
     $ docker pull <image name>:<version>
+
+Publish an image to the repository
+
+    $ docker push <repository name>/<software name>:<software version>
+
+Build an image
+
+    $ docker build -t <repository name>/<software name>:<software version> .
+
+Change the tag of an image
+
+    $ docker tag <current tag> <new tag>
+
+Build history of an image
+
+    $ docker history <image name>
