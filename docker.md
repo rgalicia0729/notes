@@ -122,3 +122,28 @@ Mount a volume to a container
 
     $ docker run --mount src=<volume name>,dst=<container directory> <image name>
 
+Delete volumes that are not being used
+
+    $ docker volume prune
+
+Copy files from machine to container
+
+    $ docker cp <file path> <container id>:<path into container>
+
+    $ docker cp <file path> <container name>:<path into container>
+
+Copy files from container to machine
+
+    $ docker cp <container id>:<path into container> <file path>
+
+    $ docker cp <container name>:<path into container> <file path> 
+
+View the images that are in the local environment
+
+    $ docker image ls
+
+    $ docker images
+
+Bring an image from a repository to the local environment
+
+    $ docker pull <image name>:<version>
