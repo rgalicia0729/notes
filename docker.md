@@ -163,3 +163,35 @@ Change the tag of an image
 Build history of an image
 
     $ docker history <image name>
+
+Show network interfaces
+
+    $ docker network ls
+
+Create a network interface
+
+    $ docker network create --attachable <network name>
+
+Delete a network interface
+
+    $ docker network rm <network id>
+
+    $ docker network rm <network name>
+
+Inspect a network interface
+
+    $ docker inspect <network id>
+
+    $ docker inspect <network name>
+
+Connect a container to a network interface
+
+    $ docker network connect <network id> <container id>
+
+    $ docker network connect <network name> <container name>
+
+Pass environment variables
+
+    $ docker run --env=<variable value> <container id>
+    
+    $ docker run --env=<variable value> <container name>
