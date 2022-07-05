@@ -198,7 +198,7 @@ Pass environment variables
 
 ## Docker compose
 
-Example of a compose file
+Example of a compose file "docker-compose.yml"
 
 ```yml
 version: "3.8"
@@ -209,6 +209,9 @@ services:
     image: rgalicia0729/test
     environment:
       MONGO_URL: 'mongodb://db:27017/test'
+    volumes:
+      -.:/usr/app
+      -/usr/app/node_modules
     depends_on:
       - db
     ports:
@@ -217,6 +220,10 @@ services:
   db:
     image: mongo
 ```
+
+Docker compose build
+
+    $ docker-compose build
 
 Run docker compose services
 
@@ -241,3 +248,15 @@ Run a command on a compose service
 Destroy compose services
 
     $ docker-compose down
+
+Compose override "docker-compose.override.yml"
+
+```yml
+version: "3.8"
+
+services:
+
+  app:
+    build: .
+    command: npx nodemon index.js
+```
