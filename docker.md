@@ -192,6 +192,52 @@ Connect a container to a network interface
 
 Pass environment variables
 
-    $ docker run --env=<variable value> <container id>
-    
-    $ docker run --env=<variable value> <container name>
+    $ docker run --env <variable name>=<variable value> <container id>
+
+    $ docker run --env <variable name>=<variable value> <container name>
+
+## Docker compose
+
+Example of a compose file
+
+```yml
+version: "3.8"
+
+services:
+
+  app:
+    image: rgalicia0729/test
+    environment:
+      MONGO_URL: 'mongodb://db:27017/test'
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+
+  db:
+    image: mongo
+```
+
+Run docker compose services
+
+    $ docker-compose up -d
+
+View docker compose services
+
+    $ docker-compose ps
+
+View docker compose services logs
+
+    $ docker-compose logs
+
+View the logs of a specific service
+
+    $ docker-compose logs <service name>
+
+Run a command on a compose service
+
+    $ docker-compose exec <service name> <custom command>
+
+Destroy compose services
+
+    $ docker-compose down
