@@ -48,10 +48,6 @@ Remove a running container
 
     $ docker rm -f <container name>    
 
-Remove all containers that are not running
-
-    $ docker container prune
-
 Run a container in interactive mode
 
     $ docker run -it <image name>
@@ -260,3 +256,43 @@ services:
     build: .
     command: npx nodemon index.js
 ```
+
+Delete containers
+
+    $ docker container prune
+
+Delete images
+
+    $ docker image prune
+
+Remove networks
+
+    $ docker network prune
+
+Delete volumes
+
+    $ docker volume prune
+
+Delete containers, images, volumes and networks
+
+    $ docker system prune
+
+Delete all containers
+
+    $ docker rm -f $(docker ps -aq)
+
+Delete all images
+
+    $ docker rmi -f $(docker image ls -q)
+
+See the resources of the running containers
+
+    $ docker stats
+
+Assign a memory limit to a container
+
+    $ docker run --memory <1g | 4m> <image name>
+
+Kill a docker container
+
+    $ docker kill <container name>
