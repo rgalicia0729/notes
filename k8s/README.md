@@ -32,7 +32,7 @@ Remove resources from a manifest
 
 Get the list of pods
 
-    $ kubectl get pods
+    $ kubectl get pods | po
 
 View a pod description
 
@@ -94,6 +94,10 @@ Filter pods by labels
 
     $ kubectl get pods -l <tag=value>
 
+Add a label to a pod that is running
+
+    $ kubectl label pod <pod-name> <tag=value>
+
 ## ReplicaSets
 
 ```yaml
@@ -117,3 +121,10 @@ spec:
         - name: container-test
           image: nginx:alpine
 ```
+Get the list of replica set
+
+    $ kubectl get replicaset | rs
+
+Get the yaml from a replica set
+
+    $ kubectl get rs <replica set name> -o yaml
