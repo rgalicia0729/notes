@@ -58,5 +58,8 @@ View the logs of a pod
 
     $ kubectl logs <pod name> -f
 
+Select a container from a pod running two containers
+
+    $ kubectl logs <pod name> -c <container name>
 
 
