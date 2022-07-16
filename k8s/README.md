@@ -128,3 +128,51 @@ Get the list of replica set
 Get the yaml from a replica set
 
     $ kubectl get rs <replica set name> -o yaml
+
+## Deployment
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-test
+  annotations:
+    kubernetes.io/change-cause: "Change port to 80"
+  labels:
+    app: front
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+
+```
+Show the labels of a deployment
+
+    $ kubectl get deployment --show-labels
+
+View the status of a deployment
+
+    $ kubectl rollout status deployment <deployment name>
+
+View rollout history
+
+    $ kubectl rollout history deployment <deployment name>
+
+View review status
+
+    $ kubectl rollout history deployment <deployment name> --revision=<revision number>
+
+change review
+
+    $ kubectl rollout undo deployment <deployment name> --to-revision=<revision number>
