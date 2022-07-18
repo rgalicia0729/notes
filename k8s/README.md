@@ -34,6 +34,10 @@ Get the list of pods
 
     $ kubectl get pods | po
 
+Show more information about a pod
+
+    $ kubectl get pods -o wide
+
 View a pod description
 
     $ kubectl describe pod <pod name>
@@ -176,3 +180,22 @@ View review status
 change review
 
     $ kubectl rollout undo deployment <deployment name> --to-revision=<revision number>
+
+## Services
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-test
+  labels:
+    app: app-web
+spec:
+  selector:
+    app: app-web
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+```
+
