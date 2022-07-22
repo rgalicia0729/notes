@@ -199,3 +199,35 @@ spec:
       targetPort: 80
 ```
 
+## Namespaces
+
+See the namespaces
+
+    $ kubectl get namespaces
+
+Create a namespace
+
+    $ kubectl create namespace <namespace name>
+
+Create a namespaces through a yaml
+
+```yaml
+apiVersion: v1
+kind: Namespaces
+metadata:
+  name: develop
+  label:
+    name: develop
+```
+
+See namespace labels
+
+    $ kubectl get namespaces --show-labels
+
+Describe a namespace
+
+    $ kubectl describe namespace <namespace name>
+
+Delete a namespace
+
+    $ kubectl delete namespace <namespace name>
