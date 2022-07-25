@@ -231,3 +231,66 @@ Describe a namespace
 Delete a namespace
 
     $ kubectl delete namespace <namespace name>
+
+## AWS EKS
+
+1. Install aws cli (AWS Documentation)
+
+2. Create a user in IAM.
+
+3. Configure aws CLI with user credentials
+
+    $ aws configure
+
+4. Validate which user is configured in aws CLI
+
+    $ aws sts get-caller-identity
+
+5. Install eksctl
+
+    $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+    $ brew tap weaveworks/tap
+
+    $ brew install weaveworks/tap/eksctl
+
+    $ eksctl version
+
+6. Install Kubectl MacOS Apple-silicon M1
+
+    $ curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/darwin/amd64/kubectl
+
+    $ chmod +x ./kubectl
+
+    $ mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+
+    $ echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile
+
+    $ kubectl version --short --client
+
+7. Create a cluster with eksctl in aws
+
+    $ eksctl create cluster --name eks-test --region us-east-2 --zones us-east-2a,us-east-2b --without-nodegroup
+
+8. Configure kubeconfig to connect to the cluster
+
+    $ aws eks --region us-east-2 update-kubeconfig --name eks-test
+
+9. View cluster information
+
+    $ kubectl cluster-info
+
+10. Creating a managed node group
+
+    eksctl create nodegroup \
+      --cluster eks-test \
+      --region us-east-2 \
+      --name workers-test \
+      --node-type t2.small \
+      --nodes 1 \
+      --nodes-min 1 \
+      --nodes-max 3 \
+      --ssh-access \
+      --asg-access
+
+
