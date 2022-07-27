@@ -270,11 +270,17 @@ Delete a namespace
 
 7. Create a cluster with eksctl in aws
 
-    $ eksctl create cluster --name eks-test --region us-east-2 --zones us-east-2a,us-east-2b --without-nodegroup
+    $ eksctl create cluster \ 
+      --name <cluster name> \ 
+      --region <region> \ 
+      --zones <zone a>,<zone b> \
+      --without-nodegroup
 
 8. Configure kubeconfig to connect to the cluster
 
-    $ aws eks --region us-east-2 update-kubeconfig --name eks-test
+    $ aws eks \
+      --region <region> update-kubeconfig \
+      --name <cluster name>
 
 9. View cluster information
 
@@ -293,4 +299,33 @@ Delete a namespace
       --ssh-access \
       --asg-access
 
+11. Implemente una AWS Load Balancer Controller en un clúster de Amazon EKS.
+
+    $ eksctl utils associate-iam-oidc-provider \
+      --region us-east-2 \
+      --cluster eks-test \
+      --approve
+
+    $ aws iam create-policy \
+      --policy-name AWSLoadBalancerControllerIAMPolicy \
+      --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.2/docs/install/iam_policy.json
+
+    $ eksctl create iamserviceaccount \
+      --cluster eks-test \
+      --namespace=kube-system \
+      --name alb-ingress-controller \
+      --region us-east-2 \
+      --attach-policy-arn arn:aws:iam::856536748046:policy/AWSLoadBalancerControllerIAMPolicy \
+      --override-existing-serviceaccounts \
+      --approve
+
+    $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/rbac-role.yaml
+    
+    $ kubectl apply \
+    --validate=false \
+    -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
+
+    $ kubectl apply -f https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.2/v2_4_2_full.yaml
+
+    $ kubectl get deployment -n kube-system aws-load-balancer-controller
 
