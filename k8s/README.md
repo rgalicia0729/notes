@@ -262,9 +262,13 @@ Delete a namespace
 
     $ chmod +x ./kubectl
 
-    $ mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+    $ sudo cp ./kubectl /usr/local/bin/kubectl
 
-    $ echo 'export PATH=$PATH:$HOME/bin' >> ~/.bash_profile
+    $ sudo chown root: /usr/local/bin/kubectl
+
+    $ export PATH=$HOME/bin:$PATH
+
+    $ echo 'export PATH=$PATH:$HOME/bin' >> ~/.zshrc
 
     $ kubectl version --short --client
 
@@ -289,9 +293,9 @@ Delete a namespace
 10. Creating a managed node group
 
     eksctl create nodegroup \
-      --cluster eks-test \
-      --region us-east-2 \
-      --name workers-test \
+      --cluster <cluster name> \
+      --region <region> \
+      --name <workers name> \
       --node-type t2.small \
       --nodes 1 \
       --nodes-min 1 \
@@ -302,8 +306,8 @@ Delete a namespace
 11. Implemente una AWS Load Balancer Controller en un clúster de Amazon EKS.
 
     $ eksctl utils associate-iam-oidc-provider \
-      --region us-east-2 \
-      --cluster eks-test \
+      --region <region> \
+      --cluster <cluster name> \
       --approve
 
     $ aws iam create-policy \
@@ -311,21 +315,52 @@ Delete a namespace
       --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.2/docs/install/iam_policy.json
 
     $ eksctl create iamserviceaccount \
-      --cluster eks-test \
-      --namespace=kube-system \
+      --cluster <cluster name> \
+      --region <region> \
+      --namespace kube-system \
       --name alb-ingress-controller \
-      --region us-east-2 \
-      --attach-policy-arn arn:aws:iam::856536748046:policy/AWSLoadBalancerControllerIAMPolicy \
+      --attach-policy-arn <arn:aws:iam::856536748046:policy/AWSLoadBalancerControllerIAMPolicy> \
       --override-existing-serviceaccounts \
       --approve
 
     $ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/rbac-role.yaml
     
     $ kubectl apply \
-    --validate=false \
+    --validate false \
     -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 
     $ kubectl apply -f https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.2/v2_4_2_full.yaml
 
     $ kubectl get deployment -n kube-system aws-load-balancer-controller
+
+12. Create ingress controller App
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: game-2048
+  name: ingress-2048
+  labels:
+    app: ingress-2048
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-2048
+                port:
+                  number: 80
+```
+
+Get the ingress created
+
+    $ kubectl get ingress -n <namespace>
 
