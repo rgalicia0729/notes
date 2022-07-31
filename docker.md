@@ -1,4 +1,4 @@
-# Comandos de Docker
+# Docker commands
 
 See docker version
 
