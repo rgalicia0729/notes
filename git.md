@@ -86,3 +86,28 @@ Create an alias of a command
 
     $ git config --global alias.<alias name> '<command>'
 
+Git diff
+
+    $ git diff
+
+    $ git diff --staged
+
+Fix last commit comment
+
+    $ git commit --amend -m <comment>
+
+Move to a previous commit without losing the changes
+
+    $ git reset --soft <HEAD^ | hash>
+
+Go back to a previous commit by removing everything from the stage
+
+    $ git reset --mixed <HEAD^ | hash>
+
+Go back to a previous commit removing changes
+
+    $ git reset --hard <Head^ | hash>
+
+Get git change reference in chronological order
+
+    $ git reflog
