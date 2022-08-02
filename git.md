@@ -106,11 +106,7 @@ Go back to a previous commit by removing everything from the stage
 
 Go back to a previous commit removing changes
 
-<<<<<<< HEAD
     $ git reset --hard <HEAD^ | hash>
-=======
-    $ git reset --hard <Head^ | hash>
->>>>>>> 2bcb67fa6569bc13e19a0a25fa4596dc1e8a6553
 
 Get git change reference in chronological order
 
