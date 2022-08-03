@@ -111,3 +111,15 @@ Go back to a previous commit removing changes
 Get git change reference in chronological order
 
     $ git reflog
+
+Rename a file
+
+    $ git mv <current name> <new name>
+
+Delete a file
+
+    $ git rm <file name>
+
+Recover a recently deleted file
+
+    $ git reset --hard 
