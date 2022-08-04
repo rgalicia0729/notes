@@ -122,4 +122,35 @@ Delete a file
 
 Recover a recently deleted file
 
-    $ git reset --hard 
+    $ git reset --hard
+
+Show the list of branches
+
+    $ git branch
+
+Create a new branch
+
+    $ git branch <branch name>
+
+Create a new branch and move to the new branch
+
+    $ git checkout -b <branch name>
+
+Move to another branch
+
+    $ git switch <branch name>
+
+    $ git checkout <branch name>
+
+Merge between branches
+
+    $ git merge <branch name>
+
+Delete a branch
+
+    $ git branch -d <branch name>
+
+Forcefully delete a branch
+
+    $ git branch -d <branch name> -f
+
