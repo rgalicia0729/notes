@@ -154,3 +154,34 @@ Forcefully delete a branch
 
     $ git branch -d <branch name> -f
 
+See the list of tags
+
+    $ git tag
+
+Create a tag
+
+    $ git tag <tag name>
+
+    $ git tag -a <tag name> -m <comment>
+
+    $ git tag -a <tag name> <hash commit> -m <comment>
+
+Show tag information
+
+    $ git show <tag name>
+
+Delete a tag
+
+    $ git tag -d <tag name>
+
+Save changes to the stash
+
+    $ git stash
+
+See the stash list
+
+    $ git stash list
+
+Retrieve the last stash
+
+    $ git stash pop
