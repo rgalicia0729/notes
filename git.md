@@ -16,6 +16,8 @@ Get help for a command
 
     $ git help <command>
 
+## Git config
+
 Configure username and email in git
 
     $ git config --global user.name "<user name>"
@@ -30,11 +32,17 @@ Change default branch name
 
     $ git config --global init.defaultBranch <branch name>
 
+Create an alias of a command
+
+    $ git config --global alias.<alias name> '<command>'
+
+## Git stage and commit
+
 Initialize a repository
 
     $ git init
 
-View branch status
+See current status
 
     $ git status
 
@@ -56,14 +64,6 @@ Go back to last commit
 
     $ git checkout -- .
 
-Get the list of branches
-
-    $ git branch
-
-Rename a branch
-
-    $ git branch -m <current name> <new name>
-
 Add to stage and commit
 
     $ git commit -am <comment>
@@ -82,10 +82,6 @@ Add files of the same extension to stage with a wildcard
 
 File to track a directory ".gitkeep"
 
-Create an alias of a command
-
-    $ git config --global alias.<alias name> '<command>'
-
 Git diff
 
     $ git diff
@@ -95,6 +91,8 @@ Git diff
 Fix last commit comment
 
     $ git commit --amend -m <comment>
+
+## Git reset
 
 Move to a previous commit without losing the changes
 
@@ -124,6 +122,8 @@ Recover a recently deleted file
 
     $ git reset --hard
 
+## Git branch
+
 Show the list of branches
 
     $ git branch
@@ -135,6 +135,10 @@ Create a new branch
 Create a new branch and move to the new branch
 
     $ git checkout -b <branch name>
+
+Rename a branch
+
+    $ git branch -m <current name> <new name>
 
 Move to another branch
 
@@ -153,6 +157,8 @@ Delete a branch
 Forcefully delete a branch
 
     $ git branch -d <branch name> -f
+
+## Git tag
 
 See the list of tags
 
@@ -174,14 +180,40 @@ Delete a tag
 
     $ git tag -d <tag name>
 
+## Git stash
+
 Save changes to the stash
 
     $ git stash
+
+Save changes to the stash and give it a name
+
+    $ git stash save <stash name>
+
+Show stash detail
+
+    $ git stash show <stash name>
 
 See the stash list
 
     $ git stash list
 
+Show the detail of each stash in the list
+
+    $ git stash list --stat
+
 Retrieve the last stash
 
     $ git stash pop
+
+Retrieve a specific stash
+
+    $ git stash apply <stash name>
+
+Delete all stash
+
+    $ git stash clear
+
+Delete a specific stash
+
+    $ git stash drop <stash name>
