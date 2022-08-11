@@ -217,3 +217,13 @@ Delete all stash
 Delete a specific stash
 
     $ git stash drop <stash name>
+
+## Git rebase
+
+Do a rebase
+
+    $ git rebase <branch name>
+
+Do an interactive rebase
+
+    $ git rebase -i HEAD~<number of commits>
