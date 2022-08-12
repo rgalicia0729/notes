@@ -180,6 +180,10 @@ Delete a tag
 
     $ git tag -d <tag name>
 
+Upload the tags to the remote repository
+
+    $ git push --tags
+
 ## Git stash
 
 Save changes to the stash
@@ -227,3 +231,13 @@ Do a rebase
 Do an interactive rebase
 
     $ git rebase -i HEAD~<number of commits>
+
+## GitHub
+
+Pulling without reconcile strategy
+
+    $ git config --global pull.ff only
+
+List remote repositories
+
+    $ git remote -v
